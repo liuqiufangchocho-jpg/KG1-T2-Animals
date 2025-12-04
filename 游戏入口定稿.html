@@ -1,0 +1,188 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>动物游戏入口 | 深空星云主题</title>
+    <!-- 引入 Tailwind CSS CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        /* 导入 Inter 字体，用于现代科技感 */
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;700;900&display=swap');
+        
+        /* 根据“深空星云”配色方案设置全局背景和文字颜色 */
+        :root {
+            --color-bg-primary: #0A192F; /* 主背景：深蓝/黑 */
+            --color-text-primary: #CCD6F6; /* 主文本：浅灰蓝 */
+            --color-accent: #64FFDA; /* 强调色/CTA：亮青色 */
+            --color-card-bg: #1c3359; /* 卡片背景：暗蓝色 */
+            --color-secondary-highlight: #5CB6E0; /* 辅助色：天蓝色 */
+            font-family: 'Inter', sans-serif;
+        }
+
+        body {
+            background-color: var(--color-bg-primary);
+            color: var(--color-text-primary);
+            /* 使用 flex 确保内容垂直居中且适应屏幕，实现无需翻页 */
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            padding: 1rem;
+            margin: 0;
+            overflow-y: auto; /* 允许垂直滚动以防内容过高 */
+            overflow-x: hidden; /* 确保不出现水平滚动条 */
+        }
+        
+        /* 游戏卡片样式 */
+        .game-card {
+            background-color: var(--color-card-bg);
+            border: 2px solid var(--color-card-bg);
+            transition: transform 0.3s, box-shadow 0.3s, border-color 0.3s;
+            cursor: pointer;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.5); /* 阴影增强立体感 */
+        }
+
+        /* 鼠标悬停时的动画和颜色变化 */
+        .game-card:hover {
+            transform: translateY(-5px);
+            border-color: var(--color-accent);
+            box-shadow: 0 10px 30px rgba(100, 255, 218, 0.25); /* 强调色发光效果 */
+        }
+        
+        /* 标题高亮和点击区域现在应用在整个卡片上 */
+        .game-title {
+            color: var(--color-text-primary);
+            transition: color 0.3s;
+        }
+
+        .game-card:hover .game-title {
+            color: var(--color-accent); /* 鼠标悬停时标题高亮 */
+        }
+
+        .emoji-icon {
+            font-size: 3rem; /* 调整 Emoji 尺寸 */
+            line-height: 1; /* 确保行高正确 */
+        }
+        
+        /* 强制 9:16 比例所需的填充：16 / 9 * 100% = 177.77% */
+        .aspect-9-16 {
+            padding-bottom: 177.77%;
+        }
+
+        /* 确保内容能垂直居中 */
+        .card-content {
+            position: absolute;
+            inset: 0;
+            /* 调整 padding 以容纳 Emoji */
+            padding: 1.5rem; 
+        }
+
+        /* 连连看图标容器的定位 */
+        .connect-icon-container {
+            /* 保持 flex 布局以并排显示三条鱼 */
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            width: 100%;
+            height: 4rem; /* 固定高度以容纳 Emoji */
+            margin-bottom: 1rem;
+        }
+        
+        .fish-emoji {
+            /* 确保鱼的位置居中 */
+            position: relative;
+            z-index: 10;
+        }
+        
+        /* 消消乐卡牌容器样式 */
+        .memory-icon-container {
+            display: flex;
+            gap: 0.5rem; /* 两张卡牌之间的间距 */
+            justify-content: center;
+            align-items: center;
+            height: 4rem;
+            margin-bottom: 1rem;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="max-w-7xl w-full">
+        <!-- 主标题 (已修改) -->
+        <h1 class="text-3xl sm:text-4xl font-extrabold text-center mb-8 sm:mb-12" style="color: var(--color-accent);">
+            KG1 Term2 Animals
+        </h1>
+
+        <!-- 游戏卡片容器：在桌面端平铺三列，在移动端堆叠 -->
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-6 sm:gap-8 lg:gap-12">
+
+            <!-- 1. 动物连连看 (Animal Connect) -->
+            <a href="https://liuqiufangchocho-jpg.github.io/dong-wu-lian-lian-kan/" target="_blank" class="game-card block rounded-xl overflow-hidden relative w-full max-w-xs mx-auto">
+                <!-- 强制 9:16 比例容器 -->
+                <div class="relative aspect-9-16">
+                    <div class="card-content flex flex-col items-center justify-center text-center">
+                        <h2 class="game-title text-2xl sm:text-3xl font-bold mb-4">
+                            动物连连看        
+                                           Animal Link-Up
+                        </h2>
+                        
+                        <!-- 三条鱼 Emoji (已移除 SVG 连线) -->
+                        <div class="connect-icon-container">
+                            <!-- SVG 连线已移除 -->
+                            <!-- 鱼 Emoji -->
+                            <span class="fish-emoji emoji-icon">🐟</span>
+                            <span class="fish-emoji emoji-icon">🐟</span>
+                            <span class="fish-emoji emoji-icon">🐟</span>
+                        </div>
+                        
+                        <!-- 提示文字 -->
+                        <p class="text-sm opacity-70 mt-6" style="color: var(--color-text-primary);">Connect as many of the same animal as possible within one minute.</p>
+                    </div>
+                </div>
+            </a>
+
+            <!-- 2. 动物消消乐 (Animal Memory Match) -->
+            <a href="https://liuqiufangchocho-jpg.github.io/dong-wu-xiao-xiao-le/" target="_blank" class="game-card block rounded-xl overflow-hidden relative w-full max-w-xs mx-auto">
+                 <!-- 强制 9:16 比例容器 -->
+                <div class="relative aspect-9-16">
+                    <div class="card-content flex flex-col items-center justify-center text-center">
+                        <h2 class="game-title text-2xl sm:text-3xl font-bold mb-4">
+                            动物消消乐        
+                                       Animal Memory Match
+                        </h2>
+                        <!-- 两张卡牌背面 Emoji -->
+                        <div class="memory-icon-container">
+                            <span class="emoji-icon">🎴</span>
+                            <span class="emoji-icon">🎴</span>
+                        </div>
+                        <!-- 提示文字 -->
+                        <p class="text-sm opacity-70 mt-6" style="color: var(--color-text-primary);">Two cards of the same animal will disappear when paired.</p>
+                    </div>
+                </div>
+            </a>
+
+            <!-- 3. 动物迷宫大冒险 (Animal Maze Adventure) -->
+            <a href="https://liuqiufangchocho-jpg.github.io/dong-wu-mi-gong/" target="_blank" class="game-card block rounded-xl overflow-hidden relative w-full max-w-xs mx-auto">
+                 <!-- 强制 9:16 比例容器 -->
+                <div class="relative aspect-9-16">
+                    <div class="card-content flex flex-col items-center justify-center text-center">
+                        <h2 class="game-title text-2xl sm:text-3xl font-bold mb-4">
+                            动物迷宫大冒险
+                                          Animal Maze Adventure
+                        </h2>
+                        <!-- 迷宫 Emoji -->
+                        <div class="h-16 flex items-center justify-center mb-4">
+                            <span class="emoji-icon">➿</span>
+                        </div>
+                        <!-- 提示文字 -->
+                        <p class="text-sm opacity-70 mt-6" style="color: var(--color-text-primary);">Draw the correct route from the smiley face to the animal.</p>
+                    </div>
+                </div>
+            </a>
+
+        </div>
+    </div>
+
+</body>
+</html>
